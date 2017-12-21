@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test": "jest",
+    "build": "node node_modules/.bin/tsc",
+    "build:watch": "node node_modules/.bin/tsc -w"
   },
   "dependencies": {
     "react": "16.0.0",
