@@ -1,12 +1,12 @@
-import 'react-native';
 import * as React from 'react';
-import App from '../App'
+import { } from 'jest';
+import * as ReactNative from 'react-native';
+import { shallow } from 'enzyme';
+import toJson from 'enzyme-to-json';
 
-// Note: test renderer must be required after react-native.
-import * as renderer from 'react-test-renderer';
+import App from '../app'
 
 it('renders correctly', () => {
-  const tree = renderer.create(
-    <App />
-  );
+  const wrapper = shallow(<App />);
+  expect(toJson(wrapper)).toMatchSnapshot();
 });

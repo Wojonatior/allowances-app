@@ -4,6 +4,8 @@
 
 # Xcode
 #
+.jest
+.buckconfig
 build/
 *.pbxuser
 !default.pbxuser
