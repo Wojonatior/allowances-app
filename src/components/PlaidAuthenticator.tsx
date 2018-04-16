@@ -3,7 +3,6 @@ import { WebView } from 'react-native';
 
 type Props = {
   publicKey: string,
-  selectAccount?: string,
   onMessage: ({}) => void,
   env: string,
   product: string,
@@ -18,7 +17,6 @@ export default class PlaidAuthenticator extends React.Component<Props, {}> {
   render() {
     let {
       publicKey,
-      selectAccount,
       env,
       product,
       clientName,
