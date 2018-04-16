@@ -1,4 +1,11 @@
 {
   "name": "Allowances",
-  "displayName": "Allowances"
+  "displayName": "Allowances",
+  "expo": {
+    "sdkVersion": "26.0.0",
+    "packagerOpts": {
+      "sourceExts": ["ts", "tsx"],
+      "transformer": "node_modules/react-native-typescript-transformer/index.js"
+    }
+  }
 }
