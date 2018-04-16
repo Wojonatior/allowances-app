@@ -35,7 +35,7 @@ export default class PlaidAuthenticator extends React.Component<Props, {}> {
       publicKey
     }&env=${env}&apiVersion=v2&product=${product}&selectAccount=true&clientName=${
       clientName
-    }&isMobile=true&isWebView=true&public_token=""`;
+    }&isMobile=true&isWebView=true`;
 
     uri = token !== undefined ? `${uri}&token=${token}` : uri;
     uri = webhook !== undefined ? `${uri}&webhook=${webhook}` : uri;
@@ -51,25 +51,6 @@ export default class PlaidAuthenticator extends React.Component<Props, {}> {
   }
 
   onMessage = (e: any) => {
-    /*
-      Response example for success
-      {
-        "action": "plaid_link-undefined::connected",
-        "metadata": {
-          "account": {
-            "id": null,
-            "name": null
-          },
-          "account_id": null,
-          "public_token": "public-sandbox-e697e666-9ac2-4538-b152-7e56a4e59365",
-          "institution": {
-            "name": "Chase",
-            "institution_id": "ins_3"
-          }
-        }
-      }
-    */
-
     this.props.onMessage(JSON.parse(e.nativeEvent.data));
   };
 }
