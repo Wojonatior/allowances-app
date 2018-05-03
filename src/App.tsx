@@ -6,8 +6,8 @@ type State = {
   data: {
     metadata: {
       institution: {
-        name: string,
-        institution_id: string
+        institution_id: string,
+        name: string
       },
       public_token: string
     }
@@ -34,10 +34,9 @@ export default class App extends React.Component<{}, State> {
   }
 
   render() {
-    console.log(this.state.status)
-
     switch(this.state.status) {
       case 'CONNECTED':
+        this.onSuccess(this.state.data.metadata)
         return this.renderDetails()
       case 'LOGIN_BUTTON':
       case 'EXIT':
@@ -66,6 +65,42 @@ export default class App extends React.Component<{}, State> {
   onLoadEnd = (props: any) => {
     console.log('onLoadEnd', props);
   };
+
+  onSuccess = (props: any) => {
+    const data = {public_token: props.public_token};
+    console.log(data);
+
+    fetch('http://localhost:5000/get_access_token', {
+      method: 'POST',
+      credentials: 'include',
+      body: JSON.stringify(data),
+      headers: new Headers({
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      })
+    }).then(this.handleResponse)
+    .then(data => {
+      console.log('Data: ', data);
+    }).catch(error => {
+      console.error('Error:', error)
+    });
+  };
+
+  handleResponse = (response: any) => {
+    return response.json()
+      .then((json: any) => {
+        if (response.ok) {
+          return json;
+        } else {
+          console.log(json);
+          let error = Object.assign({}, json, {
+            status: response.status,
+            statusText: response.statusText
+          });
+          return Promise.reject(error);
+        }
+      });
+  }
 
   renderLogin() {
     return (
@@ -99,7 +134,6 @@ export default class App extends React.Component<{}, State> {
   }
 
   onMessage(data: any) {
-    console.log(data);
     this.setState({ data, status: data.action.substr(data.action.lastIndexOf(':') + 1).toUpperCase() });
   };
 }

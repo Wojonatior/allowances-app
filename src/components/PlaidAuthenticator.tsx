@@ -25,8 +25,6 @@ export default class PlaidAuthenticator extends React.Component<Props, {}> {
       token
     } = this.props;
 
-    console.log(this.props);
-
     webhook = "https://requestb.in";
 
     let uri = `https://cdn.plaid.com/link/v2/stable/link.html?key=${
