@@ -129,6 +129,9 @@ export default class App extends React.Component<{}, State> {
         <Text style={styles.value}>
           {this.state.data.metadata.public_token}
         </Text>
+        <TouchableOpacity onPress={() => this.setState({status: 'EXIT'})}>
+          <Text style={styles.paragraph}>EXIT</Text>
+        </TouchableOpacity>
       </View>
     );
   }
