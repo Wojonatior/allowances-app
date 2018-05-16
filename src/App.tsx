@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, WebView } from 'react-native';
 import PlaidAuthenticator from './components/PlaidAuthenticator';
+import SignIn from './components/signIn/SignIn';
 
 type State = {
   data: {
@@ -29,16 +30,18 @@ export default class App extends React.Component<{}, State> {
           public_token: ""
         }
       },
-      status: 'LOGIN_BUTTON'
+      status: 'SIGN_IN'
     };
   }
 
   render() {
     switch(this.state.status) {
+      case 'SIGN_IN':
+        return <SignIn onSignIn={() => this.setState({ status: 'MAIN' })} />;
       case 'CONNECTED':
         this.onSuccess(this.state.data.metadata)
-        return this.renderDetails()
-      case 'LOGIN_BUTTON':
+        return this.renderDetails();
+      case 'MAIN':
       case 'EXIT':
         return this.renderButton();
       default:
