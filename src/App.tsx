@@ -67,7 +67,7 @@ export default class App extends React.Component<{}, State> {
   };
 
   onSuccess = (props: any) => {
-    const data = {public_token: props.public_token};
+    const data = props;
     console.log(data);
 
     fetch('http://localhost:5000/get_access_token', {
